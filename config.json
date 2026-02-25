@@ -4,12 +4,12 @@
   "version": "1.0.0",
   "items": [
     {
-      "url": "https://niteshmistry.github.io/eld-compliance-monitor/index.html?v=1772045471189",
+      "url": "https://niteshmistry-sig.github.io/eld-compliance-monitor/index.html?v=1772045748889",
       "path": "ActivityLink/",
       "menuName": {
         "en": "ELD Compliance"
       },
-      "svgIcon": "https://niteshmistry.github.io/eld-compliance-monitor/images/icon.svg?v=1772045471189"
+      "svgIcon": "https://niteshmistry-sig.github.io/eld-compliance-monitor/images/icon.svg?v=1772045748889"
     }
   ],
   "isSigned": false
