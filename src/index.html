@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>ELD Compliance Monitor</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400&display=swap">
+  <style>/* STYLES_PLACEHOLDER */</style>
+</head>
+<body>
+
+<div id="eldComplianceMonitor">
+
+  <!-- Page Header with Auto-Refresh Controls -->
+  <div class="ecm-page-header">
+    <div class="ecm-header-left">
+      <svg class="ecm-header-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+      </svg>
+      <div>
+        <h1>ELD Compliance Monitor</h1>
+        <p>Real-time HOS time-remaining visibility for all drivers</p>
+      </div>
+    </div>
+    <div class="ecm-refresh-controls">
+      <label for="ecmRefreshInterval" style="font-size:12px;opacity:0.8;">Refresh:</label>
+      <select id="ecmRefreshInterval">
+        <option value="120">2 min</option>
+        <option value="180">3 min</option>
+        <option value="300" selected>5 min</option>
+      </select>
+      <span class="ecm-countdown" id="ecmCountdown">--:--</span>
+      <button class="ecm-refresh-btn" id="ecmRefreshBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+        </svg>
+        Refresh Now
+      </button>
+    </div>
+  </div>
+
+  <div class="ecm-content">
+
+    <!-- Status message -->
+    <div class="ecm-status" id="ecmStatus"></div>
+
+    <!-- Toolbar: search, driver count, violations summary -->
+    <div class="ecm-toolbar" id="ecmToolbar">
+      <input type="text" class="ecm-search" id="ecmSearch" placeholder="Search drivers...">
+      <span class="ecm-driver-count" id="ecmDriverCount"></span>
+      <div style="flex:1"></div>
+      <span class="ecm-violations-badge none" id="ecmViolationsSummary">0 Violations</span>
+    </div>
+
+    <!-- Fleet Overview Table -->
+    <div class="ecm-panel" id="ecmFleetPanel">
+      <div class="ecm-table-wrap">
+        <table class="ecm-table" id="ecmFleetTable">
+          <thead>
+            <tr>
+              <th data-sort="name">Driver <span class="sort-arrow" id="ecmSortName"></span></th>
+              <th data-sort="status">Status <span class="sort-arrow" id="ecmSortStatus"></span></th>
+              <th data-sort="drive">Drive Remaining <span class="sort-arrow" id="ecmSortDrive"></span></th>
+              <th data-sort="duty">Duty Remaining <span class="sort-arrow" id="ecmSortDuty"></span></th>
+              <th data-sort="break">Break <span class="sort-arrow" id="ecmSortBreak"></span></th>
+              <th data-sort="cycle">Cycle Remaining <span class="sort-arrow" id="ecmSortCycle"></span></th>
+              <th data-sort="violations">Violations <span class="sort-arrow" id="ecmSortViolations"></span></th>
+            </tr>
+          </thead>
+          <tbody id="ecmFleetBody">
+          </tbody>
+        </table>
+      </div>
+      <div class="ecm-empty-state ecm-hidden" id="ecmEmptyState">
+        No driver data available. Loading...
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Detail Panel Overlay -->
+  <div class="ecm-detail-overlay" id="ecmDetailOverlay"></div>
+
+  <!-- Detail Panel (slide-in) -->
+  <div class="ecm-detail-panel" id="ecmDetailPanel">
+    <div class="ecm-detail-header">
+      <div>
+        <h2 id="ecmDetailName">Driver Name</h2>
+        <div class="ecm-detail-subtitle">
+          <span id="ecmDetailRuleset">HOS Ruleset</span>
+          &nbsp;&middot;&nbsp;
+          <span class="ecm-status-badge ecm-status-default" id="ecmDetailStatus">--</span>
+        </div>
+      </div>
+      <button class="ecm-detail-close" id="ecmDetailClose">&times;</button>
+    </div>
+    <div class="ecm-detail-body">
+
+      <!-- SVG Arc Gauges -->
+      <div class="ecm-gauges" id="ecmGauges">
+        <div class="ecm-gauge-card">
+          <svg id="ecmGaugeDrive" width="100" height="70" viewBox="0 0 100 70"></svg>
+          <div class="ecm-gauge-label">Drive</div>
+          <div class="ecm-gauge-value" id="ecmGaugeDriveVal">--</div>
+        </div>
+        <div class="ecm-gauge-card">
+          <svg id="ecmGaugeDuty" width="100" height="70" viewBox="0 0 100 70"></svg>
+          <div class="ecm-gauge-label">Duty</div>
+          <div class="ecm-gauge-value" id="ecmGaugeDutyVal">--</div>
+        </div>
+        <div class="ecm-gauge-card">
+          <svg id="ecmGaugeCycle" width="100" height="70" viewBox="0 0 100 70"></svg>
+          <div class="ecm-gauge-label">Cycle</div>
+          <div class="ecm-gauge-value" id="ecmGaugeCycleVal">--</div>
+        </div>
+        <div class="ecm-gauge-card">
+          <svg id="ecmGaugeBreak" width="100" height="70" viewBox="0 0 100 70"></svg>
+          <div class="ecm-gauge-label">Break</div>
+          <div class="ecm-gauge-value" id="ecmGaugeBreakVal">--</div>
+        </div>
+      </div>
+
+      <!-- Violations -->
+      <div class="ecm-detail-section">
+        <div class="ecm-detail-section-title">Violations</div>
+        <div id="ecmDetailViolations">
+          <div class="ecm-no-violations">No active violations</div>
+        </div>
+      </div>
+
+      <!-- 7-Day Recap -->
+      <div class="ecm-detail-section">
+        <div class="ecm-detail-section-title">7-Day Recap</div>
+        <div class="ecm-recap-container">
+          <canvas id="ecmRecapCanvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Recent Status Log -->
+      <div class="ecm-detail-section">
+        <div class="ecm-detail-section-title">Recent Status Log</div>
+        <div id="ecmDetailLogs">
+          <div class="ecm-detail-loading"><span class="ecm-spinner"></span> Loading logs...</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Scripts loaded in dependency order -->
+<script>/* SCRIPT:js/hosUtils.js */</script>
+<script>/* SCRIPT:js/driverCache.js */</script>
+<script>/* SCRIPT:js/hosDataService.js */</script>
+<script>/* SCRIPT:js/fleetView.js */</script>
+<script>/* SCRIPT:js/detailView.js */</script>
+<script>/* SCRIPT:js/autoRefresh.js */</script>
+<script>/* SCRIPT:js/main.js */</script>
+
+</body>
+</html>

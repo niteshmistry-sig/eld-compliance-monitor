@@ -1,0 +1,16 @@
+{
+  "name": "ELD Compliance Monitor",
+  "supportEmail": "support@example.com",
+  "version": "1.0.0",
+  "items": [
+    {
+      "url": "https://niteshmistry.github.io/eld-compliance-monitor/index.html?v=1772045471189",
+      "path": "ActivityLink/",
+      "menuName": {
+        "en": "ELD Compliance"
+      },
+      "svgIcon": "https://niteshmistry.github.io/eld-compliance-monitor/images/icon.svg?v=1772045471189"
+    }
+  ],
+  "isSigned": false
+}
