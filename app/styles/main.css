@@ -1,0 +1,563 @@
+/* ===============================================================
+   ELD Compliance Monitor — Styles
+   All rules scoped under #ecm-root to avoid MyGeotab conflicts.
+   =============================================================== */
+
+/* -- Root -- */
+#ecm-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #333;
+  background: #fff;
+}
+
+#ecm-root *, #ecm-root *::before, #ecm-root *::after {
+  box-sizing: border-box;
+}
+
+/* -- Toolbar -- */
+#ecm-root .ecm-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px;
+  padding: 12px 16px;
+  background: #f5f6f8;
+  border-bottom: 1px solid #ddd;
+  flex-shrink: 0;
+}
+
+#ecm-root .ecm-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#ecm-root .ecm-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #666;
+}
+
+#ecm-root .ecm-select,
+#ecm-root .ecm-input {
+  font-family: inherit;
+  font-size: 13px;
+  color: #333;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  min-width: 160px;
+}
+
+#ecm-root .ecm-select:focus,
+#ecm-root .ecm-input:focus {
+  outline: none;
+  border-color: #4a90d9;
+  box-shadow: 0 0 0 2px rgba(74, 144, 217, 0.2);
+}
+
+/* -- Buttons -- */
+#ecm-root .ecm-btn {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  height: 34px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+#ecm-root .ecm-btn-primary {
+  background: #4a90d9;
+  color: #fff;
+}
+
+#ecm-root .ecm-btn-primary:hover {
+  background: #3a7bc8;
+}
+
+#ecm-root .ecm-btn-primary:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+/* -- Refresh Controls -- */
+#ecm-root .ecm-refresh-controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+#ecm-root .ecm-countdown {
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+  color: #666;
+  min-width: 40px;
+  height: 34px;
+  line-height: 34px;
+}
+
+/* -- Driver Count & Violations Badge -- */
+#ecm-root .ecm-driver-count {
+  font-size: 13px;
+  color: #666;
+  height: 34px;
+  line-height: 34px;
+}
+
+#ecm-root .ecm-violations-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 16px;
+  background: #fce4ec;
+  color: #c62828;
+  border: 1px solid #c62828;
+  height: 28px;
+}
+
+#ecm-root .ecm-violations-badge.none {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-color: #2e7d32;
+}
+
+/* -- Status Message -- */
+#ecm-root .ecm-status {
+  font-size: 13px;
+  color: #666;
+  padding: 8px 16px;
+}
+
+#ecm-root .ecm-status:empty {
+  display: none;
+}
+
+#ecm-root .ecm-status.error {
+  color: #c62828;
+  background: #fce4ec;
+  border-bottom: 1px solid #f8bbd0;
+}
+
+/* -- Content Area -- */
+#ecm-root #ecm-content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  position: relative;
+}
+
+/* -- Table -- */
+#ecm-root .ecm-table-wrap {
+  min-height: 0;
+  overflow: auto;
+}
+
+#ecm-root .ecm-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#ecm-root .ecm-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #f5f6f8;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #666;
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+  white-space: nowrap;
+}
+
+#ecm-root .ecm-table thead th.ecm-sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+#ecm-root .ecm-table thead th.ecm-sortable:hover {
+  background: #ebedf0;
+  color: #333;
+}
+
+#ecm-root .ecm-sort-arrow {
+  margin-left: 4px;
+  font-size: 10px;
+  color: #aaa;
+}
+
+#ecm-root .ecm-sort-arrow.active {
+  color: #4a90d9;
+}
+
+#ecm-root .ecm-table tbody td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+  color: #333;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+#ecm-root .ecm-table tbody tr {
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+#ecm-root .ecm-table tbody tr:hover {
+  background: #f0f5ff;
+}
+
+#ecm-root .ecm-table tbody tr.ecm-row-selected {
+  background: #e3f2fd;
+  box-shadow: inset 3px 0 0 #4a90d9;
+}
+
+/* -- Time Cells (urgency-colored) -- */
+#ecm-root .ecm-time-cell {
+  display: inline-block;
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 4px;
+  min-width: 60px;
+  text-align: center;
+}
+
+#ecm-root .ecm-time-cell.green  { color: #2e7d32; background: #e8f5e9; }
+#ecm-root .ecm-time-cell.yellow { color: #e65100; background: #fff3e0; }
+#ecm-root .ecm-time-cell.red    { color: #c62828; background: #fce4ec; }
+
+/* -- Status Badges -- */
+#ecm-root .ecm-status-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-align: center;
+  min-width: 28px;
+}
+
+#ecm-root .ecm-status-driving { background: #e3f2fd; color: #1565c0; }
+#ecm-root .ecm-status-on      { background: #fff3e0; color: #e65100; }
+#ecm-root .ecm-status-off     { background: #e8f5e9; color: #2e7d32; }
+#ecm-root .ecm-status-sb      { background: #f3e5f5; color: #7b1fa2; }
+#ecm-root .ecm-status-pc      { background: #e8eaf6; color: #283593; }
+#ecm-root .ecm-status-ym      { background: #fff8e1; color: #f57f17; }
+#ecm-root .ecm-status-default  { background: #f5f6f8; color: #666; }
+
+/* -- Violation Count Badge -- */
+#ecm-root .ecm-viol-count {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 22px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  border-radius: 11px;
+  padding: 0 6px;
+}
+
+#ecm-root .ecm-viol-count.has-violations { background: #c62828; color: #fff; }
+#ecm-root .ecm-viol-count.no-violations  { background: #f5f6f8; color: #999; }
+
+/* -- Loading Overlay -- */
+#ecm-root #ecm-loading {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 900;
+}
+
+#ecm-root .ecm-spinner-wrap {
+  text-align: center;
+}
+
+#ecm-root .ecm-spinner {
+  width: 32px;
+  height: 32px;
+  border: 4px solid #ddd;
+  border-top-color: #4a90d9;
+  border-radius: 50%;
+  animation: ecm-spin 0.8s linear infinite;
+  margin: 0 auto 12px;
+}
+
+#ecm-root .ecm-spinner-sm {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ddd;
+  border-top-color: #4a90d9;
+  border-radius: 50%;
+  animation: ecm-spin 0.6s linear infinite;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+@keyframes ecm-spin {
+  to { transform: rotate(360deg); }
+}
+
+#ecm-root #ecm-loading p {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+}
+
+/* -- Empty State -- */
+#ecm-root #ecm-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 800;
+}
+
+#ecm-root #ecm-empty p {
+  font-size: 14px;
+  color: #999;
+  margin: 0;
+}
+
+/* -- Detail Panel (slide-in from right) -- */
+#ecm-root .ecm-detail-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+#ecm-root .ecm-detail-overlay.open {
+  display: block;
+}
+
+#ecm-root .ecm-detail-panel {
+  position: fixed;
+  top: 0;
+  right: -520px;
+  width: 500px;
+  max-width: 90vw;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow-y: auto;
+  transition: right 0.3s ease;
+}
+
+#ecm-root .ecm-detail-panel.open {
+  right: 0;
+}
+
+#ecm-root .ecm-detail-header {
+  background: #4a90d9;
+  color: #fff;
+  padding: 20px 24px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+#ecm-root .ecm-detail-header h2 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 4px 0;
+}
+
+#ecm-root .ecm-detail-subtitle {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+#ecm-root .ecm-detail-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  opacity: 0.8;
+}
+
+#ecm-root .ecm-detail-close:hover {
+  opacity: 1;
+}
+
+#ecm-root .ecm-detail-body {
+  padding: 24px;
+}
+
+/* -- Gauge Section -- */
+#ecm-root .ecm-gauges {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+#ecm-root .ecm-gauge-card {
+  text-align: center;
+  padding: 16px;
+  background: #f5f6f8;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+#ecm-root .ecm-gauge-card svg {
+  display: block;
+  margin: 0 auto 8px;
+}
+
+#ecm-root .ecm-gauge-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+#ecm-root .ecm-gauge-value {
+  font-family: "Roboto Mono", monospace;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* -- Detail Sections -- */
+#ecm-root .ecm-detail-section {
+  margin-bottom: 24px;
+}
+
+#ecm-root .ecm-detail-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+/* -- Violations List -- */
+#ecm-root .ecm-violation-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #fce4ec;
+  border-left: 3px solid #c62828;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+#ecm-root .ecm-viol-type {
+  font-weight: 600;
+  color: #c62828;
+}
+
+#ecm-root .ecm-viol-detail {
+  color: #666;
+  font-size: 12px;
+}
+
+#ecm-root .ecm-no-violations {
+  color: #999;
+  font-size: 13px;
+  font-style: italic;
+  padding: 12px 0;
+}
+
+/* -- Recap Chart -- */
+#ecm-root .ecm-recap-container {
+  width: 100%;
+  height: 160px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #f5f6f8;
+  padding: 12px;
+}
+
+#ecm-root .ecm-recap-container canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* -- Status Log Timeline -- */
+#ecm-root .ecm-log-timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#ecm-root .ecm-log-entry {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+
+#ecm-root .ecm-log-entry:last-child {
+  border-bottom: none;
+}
+
+#ecm-root .ecm-log-time {
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+  color: #666;
+  min-width: 100px;
+}
+
+#ecm-root .ecm-detail-loading {
+  text-align: center;
+  padding: 40px 0;
+  color: #666;
+}
+
+/* -- Responsive -- */
+@media (max-width: 800px) {
+  #ecm-root .ecm-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  #ecm-root .ecm-select,
+  #ecm-root .ecm-input {
+    min-width: auto;
+    width: 100%;
+  }
+  #ecm-root .ecm-detail-panel {
+    width: 100vw;
+    max-width: 100vw;
+  }
+}
